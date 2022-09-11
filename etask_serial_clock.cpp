@@ -1,7 +1,6 @@
-#include <Arduino.h>
-#include <serial_display.h>
+#include <etask_serial_clock.h>
 #include <WiFi.h>
-#include <etask_wifi.h>
+//#include <etask_wifi.h>
 #include <uptime_formatter.h>
 
 #define LED_PIN 2
@@ -9,7 +8,7 @@
 #define FREQ 5000
 #define RESOLUTION 8
 
-void display(void * parameters) {
+void etask_serial_clock(void * parameters) {
 
     // Make sure WiFi is connected
     if (WiFi.status() != WL_CONNECTED) {
@@ -31,7 +30,7 @@ void display(void * parameters) {
     while (true) {
         if (counter % 100 == 0) {
             /* Do something every second */
-            Serial.print(getEpochStringByParams(UK.toLocal(now())));
+//            Serial.print(getEpochStringByParams(UK.toLocal(now())));
             Serial.println((" up " + uptime_formatter::getUptime()));
         }
         uint8_t brightness = (counter % 128) > 64 ? 128 - counter % 128 : counter % 128;
